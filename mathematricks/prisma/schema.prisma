@@ -7,12 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Courses {
+model Course {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   Description String
   Image_url   String   @map("Image-url")
   Lessons     String[]
   Topic       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("Courses")
 }
-
-
