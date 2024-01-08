@@ -1,6 +1,7 @@
 'use client'
 import { useState } from "react";
 import { addCourse } from "./actions";
+import FormSubmitButton from "@/components/FormSubmitButton";
 
 
 export default function AddCoursePage() {
@@ -66,9 +67,11 @@ export default function AddCoursePage() {
           placeholder="Lesson 6"
           className="my-3 w-full input input-bordered"
         />
-        <button className='btn btn-primary btn-block'
-        type='submit'
-        onClick={() => setIsComplete(true)}>Add Course</button>
+
+        <FormSubmitButton className='btn-block'
+        onClick={() => setIsComplete(true)}
+        >Add Course</FormSubmitButton>
+        
       </form>
       <p>{isComplete ? 'Form Submitted' : null}</p>
     </div>
