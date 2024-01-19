@@ -24,7 +24,7 @@ export default async function Home() {
             <h1 className="text-5xl font-bold">{courses[0].Topic}</h1>
             <p className='py-g'>{courses[0].Description}</p>
             <Link 
-            href={"/courses/" + courses[0].Topic}
+            href={"/topics/" + courses[0].id}
             className="btn-primary btn">
               Check it out
             </Link>
