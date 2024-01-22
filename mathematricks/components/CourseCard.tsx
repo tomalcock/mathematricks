@@ -9,7 +9,7 @@ interface CourseCardProps {
 export default function CourseCard({ course }: CourseCardProps) {
   return (
     <Link
-      href={"/courses/" + course.id}
+      href={"/topics/" + course.id}
       className="card w-full bg-base-100 hover:shadow-xl transition-shadow"
     >
       <figure>
