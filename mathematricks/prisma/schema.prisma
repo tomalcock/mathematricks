@@ -8,13 +8,34 @@ datasource db {
 }
 
 model Course {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  Description String
-  Image_url   String   @map("Image-url")
-  Lessons     String[]
-  Topic       String
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id            String          @id @default(auto()) @map("_id") @db.ObjectId
+  Description   String
+  Image_url     String          @map("Image-url")
+  Lessons       String[]
+  Topic         String
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  MyCoursesItem MyCoursesItem[]
 
   @@map("Courses")
+}
+
+model MyCourses {
+  id        String          @id @default(auto()) @map("_id") @db.ObjectId
+  courses   MyCoursesItem[]
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+
+  @@map("mycourses")
+}
+
+model MyCoursesItem {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  courseId    String    @db.ObjectId
+  course      Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  quantity    Int
+  myCoursesId String    @db.ObjectId
+  myCourses   MyCourses @relation(fields: [myCoursesId], references: [id])
+
+  @@map("mycoursesitem")
 }

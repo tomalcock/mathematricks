@@ -1,54 +1,56 @@
 import { notFound } from "next/navigation";
 import prisma from "@/lib/db/prisma";
 import Image from "next/image";
-import { cache } from 'react';
+import { cache } from "react";
 import { Metadata } from "next";
 import LessonLink from "@/components/LessonLink";
+import AddToMyCoursesButton from "./AddToMyCoursesButton";
 
 interface TopicPageProps {
-    params: {
-        id: string,
-    }
+  params: {
+    id: string;
+  };
 }
 
 const getCourse = cache(async (id: string) => {
-    const topic = await prisma.course.findUnique({where: {id}})
+  const topic = await prisma.course.findUnique({ where: { id } });
 
-    if(!topic) notFound();
+  if (!topic) notFound();
 
-    return topic;
-})
+  return topic;
+});
 
-// export async function generateMetadata({params: {id}} : TopicPageProps): Promise<Metadata> {
-//     const topic = await getCourse(id)
+export async function generateMetadata({
+  params: { id },
+}: TopicPageProps): Promise<Metadata> {
+  const topic = await getCourse(id);
 
-//     return {
-//         topic: topic.Topic + ' - Mathematricks',
-//         description: topic.Description,
-//         openGraph: {
-//             images: [{url: topic.Image_url}]
-//         },
-//     };
-// }
+  return {
+    title: topic.Topic + "- Mathematricks",
+    description: topic.Description,
+    openGraph: {
+      images: [{ url: topic.Image_url }],
+    },
+  };
+}
 
-export default async function TopicPage(
-    {params: {id}} : TopicPageProps
-) {
-    const topic = await getCourse(id)
-    return (
-        <div className='flex flex-col lg:flex-row gap-4 lg:items-center'>
-            <Image 
-            src={topic?.Image_url}
-            alt={topic?.Topic}
-            width={500}
-            height={500}
-            className='rounded-lg'
-            priority
-            />
-            <h1>{topic?.Topic}</h1>
-            <p>{topic.Description}</p>
-            <p>Lessons:</p>
-            <LessonLink lessons={topic.Lessons} id={id}/>
-        </div>
-    )
+export default async function TopicPage({ params: { id } }: TopicPageProps) {
+  const topic = await getCourse(id);
+  return (
+    <div className="flex flex-col lg:flex-row gap-4 lg:items-center">
+      <Image
+        src={topic?.Image_url}
+        alt={topic?.Topic}
+        width={500}
+        height={500}
+        className="rounded-lg"
+        priority
+      />
+      <h1>{topic?.Topic}</h1>
+      <p>{topic.Description}</p>
+      <p>Lessons:</p>
+      <LessonLink lessons={topic.Lessons} id={id} />
+      <AddToMyCoursesButton courseId={topic.id} />
+    </div>
+  );
 }
