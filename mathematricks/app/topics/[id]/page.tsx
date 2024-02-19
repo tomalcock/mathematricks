@@ -5,6 +5,7 @@ import { cache } from "react";
 import { Metadata } from "next";
 import LessonLink from "@/components/LessonLink";
 import AddToMyCoursesButton from "./AddToMyCoursesButton";
+import { incrementCourseQuantity } from "./actions";
 
 interface TopicPageProps {
   params: {
@@ -37,7 +38,7 @@ export async function generateMetadata({
 export default async function TopicPage({ params: { id } }: TopicPageProps) {
   const topic = await getCourse(id);
   return (
-    <div className="flex flex-col lg:flex-row gap-4 lg:items-center">
+    <div className="flex flex-col gap-4 lg:items-center">
       <Image
         src={topic?.Image_url}
         alt={topic?.Topic}
@@ -46,11 +47,11 @@ export default async function TopicPage({ params: { id } }: TopicPageProps) {
         className="rounded-lg"
         priority
       />
-      <h1>{topic?.Topic}</h1>
+      <h1>{topic.Topic}</h1>
       <p>{topic.Description}</p>
       <p>Lessons:</p>
-      <LessonLink lessons={topic.Lessons} id={id} />
-      <AddToMyCoursesButton courseId={topic.id} />
+      <LessonLink lessons={topic.Lessons} id={id} course={topic} />
+      <AddToMyCoursesButton courseId={topic.id} incrementCourseQuantity={incrementCourseQuantity}/>
     </div>
   );
 }

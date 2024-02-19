@@ -35,7 +35,7 @@ model MyCoursesItem {
   course      Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
   quantity    Int
   myCoursesId String    @db.ObjectId
-  myCourses   MyCourses @relation(fields: [myCoursesId], references: [id])
+  myCourses   MyCourses @relation(fields: [myCoursesId], references: [id], onDelete: Cascade)
 
   @@map("mycoursesitem")
 }

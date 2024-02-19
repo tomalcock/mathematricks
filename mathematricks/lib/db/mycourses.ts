@@ -1,33 +1,47 @@
+import { MyCourses, Prisma } from "@prisma/client";
 import prisma from "./prisma";
 import { cookies } from "next/dist/client/components/headers";
 
-export type MyMathsCourses = 
+export type MyCoursesWithCourses = Prisma.MyCoursesGetPayload<{
+  include: { courses: { include: { course: true } } };
+}>;
 
-// export async function getMyCourses() {
-//   const localMyCoursesId = cookies().get("localMyCoursesId")?.value;
-//   const myCourses = localMyCoursesId
-//     ? await prisma.myCourses.findUnique({
-//         where: { id: localMyCoursesId },
-//         include: { courses: { include: { course: true } } },
-//       })
-//     : null;
+export type MyMathsCourses = MyCoursesWithCourses & {
+  size: number;
+};
 
-//     if(!myCourses) {
-//         return null
-//     }
+export async function getMyCourses(): Promise<MyMathsCourses | null> {
+  const localMyCoursesId = cookies().get("localMyCoursesId")?.value;
 
-//     return {
-//         ...myCourses,
-//         size: myCourses.courses.reduce((acc,item) => acc + item.quantity, 0)
-//     }
-// }
+  const myCourses = localMyCoursesId
+    ? await prisma.myCourses.findUnique({
+        where: { id: localMyCoursesId },
+        include: { courses: { include: { course: true } } },
+      })
+    : null;
 
-// export async function createMyCourses() {
-//   const newMyCourses = await prisma?.myCourses.create({
-//     data: {},
-//   });
+  if (!myCourses) {
+    return null;
+  }
 
-//   //Note: Needs encryption + secure settings in real production app
+  return {
+    ...myCourses,
+    size: myCourses.courses.reduce((acc, item) => acc + item.quantity, 0),
+  };
+}
 
-//   cookies().set("localMyCoursesId", newMyCourses.id);
-// }
+export async function createMyCourses(): Promise<MyMathsCourses> {
+  const newMyCourses = await prisma?.myCourses.create({
+    data: {},
+  });
+
+  //Note: Needs encryption + secure settings in real production app
+
+  cookies().set("localMyCoursesId", newMyCourses.id);
+
+  return {
+    ...newMyCourses,
+    courses: [],
+    size: 0,
+  };
+}
