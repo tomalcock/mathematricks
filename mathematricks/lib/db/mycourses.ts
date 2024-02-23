@@ -6,6 +6,10 @@ export type MyCoursesWithCourses = Prisma.MyCoursesGetPayload<{
   include: { courses: { include: { course: true } } };
 }>;
 
+export type mycoursesItemWithCourse = Prisma.MyCoursesItemGetPayload<{
+  include : {course: true};
+}>
+
 export type MyMathsCourses = MyCoursesWithCourses & {
   size: number;
 };
