@@ -5,8 +5,9 @@ import FormSubmitButton from "@/components/FormSubmitButton";
 
 
 export default function AddCoursePage() {
-  
+
   const [isComplete, setIsComplete] = useState(false);
+  
 
   return (
     <div>
