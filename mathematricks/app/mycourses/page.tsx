@@ -14,6 +14,7 @@ export default async function MycoursesPage() {
       {mycourses?.courses.map((item) => (
         <MyCoursesEntry mycoursesItem={item} key={item.id} />
       ))}
+      {!mycourses?.courses.length && <p>My Courses is empty.</p>}
     </div>
   );
 }

@@ -3,6 +3,9 @@ import Link from "next/link";
 import { BiMath } from "react-icons/bi";
 import { getMyCourses } from "@/lib/db/mycourses";
 import CoursesButton from "./CoursesButton";
+import UserMenuButton from "./UserMenuButton";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
 async function searchCourses(formData: FormData) {
     'use server'
@@ -15,6 +18,8 @@ async function searchCourses(formData: FormData) {
 }
 
 export default async function Navbar() {
+
+    const session = await getServerSession(authOptions);
 
     const mycourses = await getMyCourses();
 
@@ -37,6 +42,7 @@ export default async function Navbar() {
                         </div>
                     </form>
                     <CoursesButton mycourses={mycourses}/>
+                    <UserMenuButton session={session} />
                 </div>
             </div>
         </div>
