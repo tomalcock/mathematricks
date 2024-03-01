@@ -3,6 +3,8 @@
 import { mycoursesItemWithCourse } from "@/lib/db/mycourses";
 import Image from "next/image";
 import Link from "next/link";
+import DeleteCourseButton from "./DeleteCourseButton";
+import DeleteCourse from "./DeleteCourse";
 
 interface mycoursesItemProps {
   mycoursesItem: mycoursesItemWithCourse;
@@ -27,6 +29,10 @@ export default function MyCoursesEntry({
           </Link>
         </div>
       </div>
+      <form action={() => DeleteCourse(course.id)}>
+        <input name="courseid" className="hidden" />
+        <DeleteCourseButton>Delete Course</DeleteCourseButton>
+      </form>
       <div className="divider" />
     </div>
   );
