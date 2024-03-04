@@ -1,7 +1,7 @@
 import { MyCourses, MyCoursesItem, Prisma } from "@prisma/client";
 import prisma from "./prisma";
 import { cookies } from "next/dist/client/components/headers";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/authOptions";
 import { getServerSession } from "next-auth/next";
 
 export type MyCoursesWithCourses = Prisma.MyCoursesGetPayload<{
