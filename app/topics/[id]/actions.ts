@@ -11,7 +11,7 @@ export async function incrementCourseQuantity(courseId: string) {
   );
 
   if (articleInMyCourses) {
-    return false
+    return undefined
   } else {
     await prisma?.myCoursesItem.create({
       data: {
