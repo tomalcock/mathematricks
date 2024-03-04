@@ -5,7 +5,7 @@ import { getMyCourses } from "@/lib/db/mycourses";
 import CoursesButton from "./CoursesButton";
 import UserMenuButton from "./UserMenuButton";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/authOptions";
 
 async function searchCourses(formData: FormData) {
     'use server'
