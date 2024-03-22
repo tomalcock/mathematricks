@@ -1,5 +1,7 @@
 import CourseCard from "@/components/CourseCard";
 import { Metadata } from "next";
+import prisma from "@/lib/db/prisma";
+
 
 interface SearchPageProps {
   searchParams: { query: string };
