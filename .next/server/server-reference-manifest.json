@@ -2,13 +2,15 @@
   "node": {
     "18379606867a0870a296cb173a22fd1ebc424000": {
       "workers": {
-        "app/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fadmin%2FDocuments%2Fmathematricks%2Fapp%2FNavbar%2FNavbar.tsx%22%2C%5B%22%24%24ACTION_0%22%5D%5D%5D&__client_imported__=!"
+        "app/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fadmin%2FDocuments%2Fmathematricks%2Fapp%2FNavbar%2FNavbar.tsx%22%2C%5B%22%24%24ACTION_0%22%5D%5D%5D&__client_imported__=!",
+        "app/search/page": "(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-action-entry-loader.js?actions=%5B%5B%22%2FUsers%2Fadmin%2FDocuments%2Fmathematricks%2Fapp%2FNavbar%2FNavbar.tsx%22%2C%5B%22%24%24ACTION_0%22%5D%5D%5D&__client_imported__=!"
       },
       "layer": {
-        "app/page": "rsc"
+        "app/page": "rsc",
+        "app/search/page": "rsc"
       }
     }
   },
   "edge": {},
-  "encryptionKey": "gNgnO5kdiNeV+47tdJMpTEMM0vV96zdHByWNh6ybi3E="
+  "encryptionKey": "UnMbB1WHb+Ge90psgGRIsxqi40d765stqHC3ntYCjQ0="
 }

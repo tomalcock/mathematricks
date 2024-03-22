@@ -5,13 +5,13 @@ interface SearchPageProps {
   searchParams: { query: string };
 }
 
-export function generateMetadata({
-  searchParams: { query },
-}: SearchPageProps): Metadata {
-  return {
-    title: `Search: ${query} - Mathematricks`,
-  };
-}
+// export function generateMetadata({
+//   searchParams: { query },
+// }: SearchPageProps): Metadata {
+//   return {
+//     title: `Search: ${query} - Mathematricks`,
+//   };
+// }
 
 export default async function SearchPage({
   searchParams: { query },
